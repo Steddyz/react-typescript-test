@@ -1,4 +1,4 @@
-import { GAMES, GamesFromServer } from "./data";
+import { GAMES, Currency, GamesFromServer, GameFromServer } from "./data";
 
 export function getGamesFromServer(): Promise<GamesFromServer> {
   return new Promise((resolve) => {
@@ -8,6 +8,15 @@ export function getGamesFromServer(): Promise<GamesFromServer> {
   });
 }
 
-export function priceWithCurrency(price: number) {
-  return `${price} Руб.`;
+export function priceWithCurrency(
+  price: NonNullable<GameFromServer["price"]>,
+  currency: GameFromServer["currency"]
+) {
+  if (currency === Currency.RUB) {
+    return `${price} ₽.`;
+  } else if (currency === Currency.USD) {
+    return `${price} $.`;
+  } else if (currency === Currency.EUR) {
+    return `${price} €.`;
+  }
 }

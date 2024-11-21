@@ -43,7 +43,7 @@ function App() {
                 version={game.version}
               />
               {typeof game.price === "number" && (
-                <div>Цена: {priceWithCurrency(game.price)}</div>
+                <div>Цена: {priceWithCurrency(game.price, game.currency)}</div>
               )}
               {game.tags && <div>Тэги: {renderTags(game.tags)}</div>}
             </>
